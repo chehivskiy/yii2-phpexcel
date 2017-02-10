@@ -231,6 +231,10 @@ class Excel extends \yii\base\Widget
 	 */
 	public $isMultipleSheet = false;
 	/**
+	 * @var boolean for set the import excel with single sheet.
+	 */
+	public $useSingleSheetMode = true;
+	/**
 	 * @var array properties for set property on the excel object.
 	 */
 	public $properties;
@@ -586,7 +590,7 @@ class Excel extends \yii\base\Widget
 		
 		$sheetDatas = [];
 		
-		if ($sheetCount > 1) {
+		if (!$this->useSingleSheetMode || $sheetCount > 1) {
 			foreach ($objectPhpExcel->getSheetNames() as $sheetIndex => $sheetName) {
 				if (isset($this->getOnlySheet) && $this->getOnlySheet != null) {
 					if(!$objectPhpExcel->getSheetByName($this->getOnlySheet)) {
